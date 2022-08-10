@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intergalactic Marketplace - Rick and Morty</title>
+    <meta name="description" content="Proyecto personal de desarrollo web hecho con HTML5, CSS3 y Javascript que haciendo uso de la API de Rick y Morty busca simular las interacciones básicas en un e-commerce y su carrito de compras">
+    <meta name="keywords" content="frontend, developer, desarrollador, html, css, javascript, api, juanes, velez, service, servicio, lading, aterrizaje, page, pagina, pagina, website, academlo, colombian, colombiano, medellin, demonqilin, software, engineer, ingeniero, engineering, ingenieria, full-stack, e-commerce, carrito, compras">
+    <meta name="author" content="Juanes Velez">
+    <meta name="robots" content="index">
+    <meta name="robots" content="follow">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="57x57" href="./assets/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="./assets/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="./assets/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="./assets/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="./assets/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="./assets/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="./assets/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="./assets/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/./assets/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="./assets/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="./assets/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="./assets/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Biblioteca Iconos -->
+    <script src="https://kit.fontawesome.com/0e96c498cb.js" crossorigin="anonymous"></script>
+    <link rel="preload" href="https://rickandmortyapi.com/api/character" as="fetch" crossorigin>
+    <!-- Estilos -->
+    <link rel="stylesheet" href="./styles/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.2.1/hamburgers.min.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header class="header" id="header">
+        <div class="container-image" data-inicio>
+            <img src="./assets/img/logo.png" alt="Logo de mercado intergaláctico" class="image">
+        </div>
+        <h1 class="title" data-inicio>Mercado Intergalactico</h1>
+        <form id="form-search" class="form-search">
+            <input type="text" name="search" class="input--search" placeholder="Busca el nombre del personaje" pattern="^\w{1,60}$" title="El nombre debe tener exclusivamente carácteres alfanúmericos" data-validar>
+            <input type="submit" class="submit--search" value="🔍" data-submit>
+        </form>
+        <button class="btn btn--menu hamburger hamburger--vortex" type="button">
+            <span class="hamburger-box">
+                <span class="hamburger-inner"></span>
+            </span>
+        </button>
+        <button class="btn btn-cart">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <div class="cart-counter" data-count="0">0</div>
+        </button>
+        <button class="btn btn-dark--mode"></button>
+        <nav class="nav">
+            <div class="nav-title">Filtrar</div>
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="nav-link" title="Ver filtro"><i class="fa-solid fa-skull nav-i"></i>Estado<i class="fa-solid fa-angle-down nav-i nav-i--down"></i></a>
+                    <div class="item-container none">
+                        <ul class="item-list">
+                            <li class="item-item"><a href="https://rickandmortyapi.com/api/character?status=alive" target="_blank" rel="noopener noreferrer" class="item-link">Vivo</a></li>
+                            <li class="item-item"><a href="https://rickandmortyapi.com/api/character?status=dead" target="_blank" rel="noopener noreferrer" class="item-link">Muerto</a></li>
+                            <li class="item-item"><a href="https://rickandmortyapi.com/api/character?status=unknown" target="_blank" rel="noopener noreferrer" class="item-link">Desconocido</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="nav-link" title="Ver filtro"><i class="fa-solid fa-spaghetti-monster-flying nav-i"></i>Especie<i class="fa-solid fa-angle-down nav-i nav-i--down"></i></a>
+                    <div class="item-container none">
+                        <ul class="item-list">
+                            <li class="item-item"><a href="https://rickandmortyapi.com/api/character?species=human" target="_blank" rel="noopener noreferrer" class="item-link">Humano</a></li>
+                            <li class="item-item"><a href="https://rickandmortyapi.com/api/character?species=alien" target="_blank" rel="noopener noreferrer" class="item-link">Alien</a></li>
+                            <li class="item-item"><a href="https://rickandmortyapi.com/api/character?species=mythological&creature" target="_blank" rel="noopener noreferrer" class="item-link">Creatura Mitológica</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="nav-link" title="Ver filtro"><i class="fa-solid fa-person-half-dress nav-i"></i>Género<i class="fa-solid fa-angle-down nav-i nav-i--down"></i></a>
+                    <div class="item-container none">
+                        <ul class="item-list">
+                            <li class="item-item"><a href="https://rickandmortyapi.com/api/character?gender=male" target="_blank" rel="noopener noreferrer" class="item-link">Masculino</a></li>
+                            <li class="item-item"><a href="https://rickandmortyapi.com/api/character?gender=female" target="_blank" rel="noopener noreferrer" class="item-link">Femenino</a></li>
+                            <li class="item-item"><a href="https://rickandmortyapi.com/api/character?gender=genderless" target="_blank" rel="noopener noreferrer" class="item-link">No Binario</a></li>
+                            <li class="item-item"><a href="https://rickandmortyapi.com/api/character?gender=unknown" target="_blank" rel="noopener noreferrer" class="item-link">Desconocido</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="nav-link" title="Ver filtro"><i class="fa-solid fa-location-dot nav-i"></i>Ubicación<i class="fa-solid fa-angle-down nav-i nav-i--down"></i></a>
+                    <div class="item-container none">
+                        <ul class="item-list">
+                            <li class="item-item"><a href="https://rickandmortyapi.com/api/location/1" target="_blank" rel="noopener noreferrer" class="item-link" data-location>Tierra C 137</a></li>
+                            <li class="item-item"><a href="https://rickandmortyapi.com/api/location/3" target="_blank" rel="noopener noreferrer" class="item-link" data-location>Ciudadela de los Ricks</a></li>
+                            <li class="item-item"><a href="https://rickandmortyapi.com/api/location/96" target="_blank" rel="noopener noreferrer" class="item-link" data-location>Tren de historias</a></li>
+                            <li class="item-item"><a href="https://rickandmortyapi.com/api/location/6" target="_blank" rel="noopener noreferrer" class="item-link" data-location>Cable Interdimensional</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <button class="btn btn--scroll hidden">&#11014;</button>
+    <main>
+        <div class="carrusel">
+            <div class="carrusel-slides" data-slices-container>
+                <picture>
+                    <source srcset="./assets/img/b1_500.png" media="(max-width: 500px)">
+                    <source srcset="./assets/img/b1_1000.png" media="(max-width: 1000px)">
+                    <source srcset="./assets/img/b1_1500.png" media="(max-width: 1500px)">
+                    <img src="./assets/img/b1_1920.jpg" alt="" class="slider" data-slide="1">
+                </picture>
+                <picture>
+                    <source srcset="./assets/img/b2_500.png" media="(max-width: 500px)">
+                    <source srcset="./assets/img/b2_1000.png" media="(max-width: 1000px")>
+                    <source srcset="./assets/img/b2_1500.png" media="(max-width: 1500px)">
+                    <img src="./assets/img/b2_1920.png" alt="" class="slider" data-slide="2">
+                </picture>
+                <picture>
+                    <source srcset="./assets/img/b3_500.png" media="(max-width: 500px)">
+                    <source srcset="./assets/img/b3_1000.png" media="(max-width: 1000px)">
+                    <source srcset="./assets/img/b3_1500.png" media="(max-width: 1500px)">
+                    <img src="./assets/img/b3_1920.png" alt="" class="slider" data-slide="3">
+                </picture>
+                <picture>
+                    <source srcset="./assets/img/b4_500.png" media="(max-width: 500px)">
+                    <source srcset="./assets/img/b4_1000.png" media="(max-width: 1000px)">
+                    <source srcset="./assets/img/b4_1500.png" media="(max-width: 1500px)">
+                    <img src="./assets/img/b4_1920.png" alt="" class="slider" data-slide="4">
+                </picture>
+                <picture>
+                    <source srcset="./assets/img/b5_500.png" media="(max-width: 500px)">
+                    <source srcset="./assets/img/b5_1000.png" media="(max-width: 1000px)">
+                    <source srcset="./assets/img/b5_1500.png" media="(max-width: 1500px)">
+                    <img src="./assets/img/b5_1920.png" alt="" class="slider" data-slide="5">
+                </picture>
+                <picture>
+                    <source srcset="./assets/img/b6_500.png" media="(max-width: 500px)">
+                    <source srcset="./assets/img/b6_1000.png" media="(max-width: 1000px)">
+                    <source srcset="./assets/img/b6_1500.png" media="(max-width: 1500px)">
+                    <img src="./assets/img/b6_1920.jpg" alt="" class="slider" data-slide="6">
+                </picture>
+            </div>
+            <div class="carrusel-btns--laterals">
+                <button class="btn carrusel-btn--lateral carrusel-btn-1" data-left><i class="fa-solid fa-angle-left"></i></button>
+                <button class="btn carrusel-btn--lateral carrusel-btn-2" data-right><i class="fa-solid fa-angle-right"></i></button>
+            </div>
+            <div class="carrusel-btns--points">
+                <button class="btn carrusel-btn--point" data-btn="1"></button>
+                <button class="btn carrusel-btn--point" data-btn="2"></button>
+                <button class="btn carrusel-btn--point" data-btn="3"></button>
+                <button class="btn carrusel-btn--point" data-btn="4"></button>
+                <button class="btn carrusel-btn--point" data-btn="5"></button>
+                <button class="btn carrusel-btn--point" data-btn="6"></button>
+            </div>
+        </div>
+        <section class="section">
+            <h2 class="section-title">NFT'S ON FIRE</h2>
+            <div class="container-products">
+                <div class="products-loader-container none">
+                    <div class="products-loader">
+                        <img src="./assets/icons/loader.svg" alt="">
+                    </div>
+                </div>
+                <template id="template-product">
+                    <article class="article article-product" data-resume="">
+                        <div class="sold-out none">SOLD OUT</div>
+                        <div class="article-container-img">
+                            <img src="" alt="" class="article-img">
+                            <div class="error-quanty"></div>
+                        </div>
+                        <div class="article-contain">
+                            <div class="article-container-details">
+                                <h3 class="article-title"></h3>
+                                <p class="status"></p>
+                                <p class="especie"></p>
+                                <p class="genero"></p>
+                                <p class="ubicacion"></p>
+                            </div>
+                            <div class="article-container-invent">
+                                <p class="article-precio"></p>
+                                <div class="control-stock none">
+                                    <button class="btn btn-stokc btn-stock--less"><i class="fa-solid fa-minus"></i></button>
+                                    <p class="quanty">1</p>
+                                    <button class="btn btn-stokc btn-stock--plus"><i class="fa-solid fa-plus"></i></button>
+                                </div>
+                                <button class="btn btn-add-cart visible"><i class="fa-solid fa-cart-plus"></i></button>
+                                <p class="stock"></p>
+                            </div>
+                        </div>
+                    </article>
+                </template>
+                <div class="error-fetch none"></div>
+            </div>
+        </section>
+        <section class="section section--cart">
+            <div class="container-cart" data-total="0">
+                <div class="msg-cart-vacio"><span>Tu carrito está vacío</span>¿No sabes que comprar? ¡Miles de NFT's te esperan!</div>
+                <div class="cart-header">
+                    <button class="btn btn-cart-hidden"><i class="fa-solid fa-arrow-left"></i></button>
+                    <h2 class="section-title title--cart">Carrito (<span>0</span>)</h2>
+                    <button class="btn btn-empty-cart" title="Vaciar carrito"><i class="fa-solid fa-trash-can"></i></button>
+                </div>
+                <div class="container-products-cart">
+                    <template id="template-product-cart">
+                        <article class="article--cart">
+                            <div class="container-img-cart">
+                                <img src="" alt="" class="img-cart">
+                            </div>
+                            <div class="container-contain-cart">
+                                <p class="article-cart-total"></p>
+                                <h3 class="article-cart-title"></h3>
+                                <p class="especie--cart"></p>
+                                <div class="article-cart-btns">
+                                    <div class="control-stock control-stock--cart">
+                                        <button class="btn btn-stokc btn-stock--less" title="Disminuir cantidad"><i class="fa-solid fa-minus"></i></button>
+                                        <p class="quanty quanty--cart">1</p>
+                                        <button class="btn btn-stokc btn-stock--plus" title="Aumentar cantidad"><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                    <button class="btn btn-remove-cart" title="Eliminar del carrito"><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                            <div class="error-quanty error-quanty--cart"></div>
+                        </article>
+                    </template>
+                </div>
+                <div class="container-action-cart">
+                    <p class="total-cart">Total:<span class="total-cart--value">$ <span>0</span> USD</span></p>
+                    <button class="btn btn-buy-cart">Comprar</button>
+                </div>
+            </div>
+        </section>
+        <div class="container-btn-load"><button class="btn btn-load"><span>Cargar más productos</span> <i class="fa-solid fa-sort-down"></i></button></div>
+        <div class="msg-buy none">
+            <div class="msg-buy-contain">
+                <p class="buy-msg">¡Tu carrito está vacío!</p>
+                <div class="btns-buy">
+                    <button class="btn btn-buy btn-confirm-buy" title="Confirmar"><i class="fa-solid fa-check"></i></button>
+                    <button class="btn btn-buy btn-close-buy" title="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+                    <button class="btn btn-buy btn-cancel-buy" title="Cancelar"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="footer-redes-container">
+            <div class="line"></div>
+            <ul class="footer-list">
+                <li class="footer-item">
+                    <a href="https://www.linkedin.com/in/carlos-junior-mej%C3%ADa-acu%C3%B1a-437702179/" target="_blank" rel="noopener noreferrer"
+                        class="footer-link" title="Visitar"><i class="fa-brands fa-linkedin-in"></i></a>
+                </li>
+                <li class="footer-item">
+                    <a href="https://github.com/CJUNIOR98" target="_blank" rel="noopener noreferrer" class="footer-link"
+                        title="Visitar"><i class="fa-brands fa-github"></i></a>
+                </li>
+                <li class="footer-item">
+                    <a href="https://twitter.com/Carlos_junior36" target="_blank" rel="noopener noreferrer" class="footer-link"
+                        title="Visitar"><i class="fa-brands fa-twitter"></i></a>
+                </li>
+            </ul>
+            <div class="line"></div>
+        </div>
+        <p class="footer-copy">Carlos Mejía in 2022 &copy;</p>
+    </footer>
+    <script src="./main.js" type="module"></script>
+</body>
+</html>
